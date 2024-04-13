@@ -8,6 +8,13 @@ resource "aws_security_group" "web_sg" {
   name        = "web_sg"
   description = "Security group for web instances"
 
+   egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
+
   ingress {
     from_port   = 22
     to_port     = 22
@@ -48,8 +55,6 @@ user_data_replace_on_change = false
 
 tags = local.common_tags
 }
-
-
 
 output "public_ips" {
   value = aws_instance.web.*.public_ip
