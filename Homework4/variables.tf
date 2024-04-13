@@ -20,8 +20,9 @@ variable key_name {
     description = "Provide key_name" 
 }
 variable ports {
-    type = string
+    type = list(number)
     description = "Provide ports"
+    default = [22, 80, 443]
 }
 
 variable availability_zone {

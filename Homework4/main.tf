@@ -2,11 +2,9 @@ provider "aws" {
   region = var.region
 }
 
-resource "aws_security_group" "allow_tls" {
-  name        = "allow_tls"
+resource "aws_security_group" "example" {
+  name        = "example"
   description = "Allow TLS inbound traffic"
-
-
 
 
   ingress {
@@ -41,3 +39,9 @@ resource "aws_security_group" "allow_tls" {
   }
 }
 
+resource "aws_instance" "example" {
+  ami           = var.ami_id
+  instance_type = var.instance_type
+  key_name      = aws_key_pair.example.key_name
+  security_groups = [aws_security_group.example.name]
+}
